@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Book Store : {{title}}
+{% endblock %}
+
+{% block main %}
+    <h1 class="mb-4 mt-5">Login to your Account</h1>
+    <div class="col-md-6 col-lg-3 mx-auto">
+    <form action="/login" method="post">
+        <label for="username" class="form-label">Username</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text">@</span>
+            <input autocomplete="off" autofocus class="form-control mx-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <label for="password" class="form-label">Password</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text">#</span>
+            <input class="form-control mx-auto" name="password" id="password" placeholder="Password" type="password">
+        </div>
+        {% if login_error %}
+            <div class="mb-3 form-control-plaintext">
+                <span style="color:red;">
+                     {{ error_message }}
+                </span>
+            </div>
+        {% endif %}
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+    </div>
+{% endblock %}
