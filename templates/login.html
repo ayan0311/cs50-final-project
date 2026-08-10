@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Book Store : {{title}}
+    {{title}}
 {% endblock %}
 
 {% block main %}
-    <h1 class="mb-4 mt-5">Login to your Account</h1>
+    <h1 class="mb-4 mt-5 text-center">Login to your Account</h1>
     <div class="col-md-6 col-lg-3 mx-auto">
     <form action="/login" method="post">
         <label for="username" class="form-label">Username</label>
@@ -25,7 +25,9 @@
                 </span>
             </div>
         {% endif %}
-        <button class="btn btn-primary" type="submit">Log In</button>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-primary" type="submit">Log In</button>
+        </div>
     </form>
     </div>
 {% endblock %}
