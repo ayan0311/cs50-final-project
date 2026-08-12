@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session
 from flask_session import Session
-import mysql.connector
-from dotenv import load_dotenv
+# import mysql.connector
+# from dotenv import load_dotenv
 import os
 
 load_dotenv()
@@ -12,12 +12,12 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-def get_db():
-    return mysql.connector.connect(
-        host = os.getenv("DB_HOST"),
-        user = os.getenv("DB_USER"),
-        password = os.getenv("DB_PASSWORD"),
-        database = os.getenv("DB_NAME")
+# def get_db():
+#    return mysql.connector.connect(
+#       host = os.getenv("DB_HOST"),
+#        user = os.getenv("DB_USER"),
+#        password = os.getenv("DB_PASSWORD"),
+#        database = os.getenv("DB_NAME")
     )
 
 @app.route("/")
