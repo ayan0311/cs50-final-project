@@ -31,7 +31,7 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template ("login.html", title="Login", current_route="login", login_error=True, 
+    return render_template ("login.html", title="Login", current_route="login", login_error=True, super_admin=True, 
                             error_message="Your username is still not approved, contact superadmin at ayansarkar.js@gmail.com")
 
 @app.route("/logout")
