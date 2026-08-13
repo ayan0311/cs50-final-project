@@ -5,7 +5,13 @@
 {% endblock %}
 
 {% block main %}
-<h1 class="mb-4 mt-5 text-center">Register</h1>
+<h1 class="mb-4 mt-5 text-center">Register for an Account</h1>
+<div class="mb-4 col-md-6 col-lg-6 mx-auto">
+<p class="mb-4 mt-5 text-center"><span style="color:red;">
+    You are dealing with sensitive Govt data, please choose a strong password. Upon registering your
+    account needs to be approved by the Super Admin before you can login. You can contact the Super Admin at
+    <a href="mailto:"ayansarkar.js@gmail.com"">ayansarkar.js@gmail.com</a> for approval.
+</span></p></div>
     <div class="col-md-6 col-lg-3 mx-auto">
     <form action="/register" method="post">
         <label for="person" class="form-label">Name</label>
