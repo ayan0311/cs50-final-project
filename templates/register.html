@@ -5,48 +5,59 @@
 {% endblock %}
 
 {% block main %}
-<h1 class="mb-4 mt-5 text-center">Register for an Account</h1>
-<div class="mb-4 col-md-6 col-lg-6 mx-auto">
-<p class="mb-4 mt-5 text-center"><span style="color:red;">
-    You are dealing with sensitive Govt data, please choose a strong password. Upon registering your
-    account needs to be approved by the Super Admin before you can login. You can contact the Super Admin at
-    <a href="mailto:"ayansarkar.js@gmail.com"">ayansarkar.js@gmail.com</a> for approval.
-</span></p></div>
-    <div class="col-md-6 col-lg-3 mx-auto">
-    <form action="/register" method="post">
-        <label for="person" class="form-label">Name</label>
-        <div class="input-group mb-3">
-            <span class="input-group-text">FN</span>
-            <input autocomplete="off" autofocus class="form-control mx-auto" id="person" name="first-name" placeholder="First Name" type="text">
-        </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text">LN</span>
-            <input autocomplete="off" class="form-control mx-auto" id="person" name="last-name" placeholder="First Name" type="text">
-        </div>
-        <label for="username" class="form-label">Username</label>
-        <div class="input-group mb-3">
-            <span class="input-group-text">@</span>
-            <input autocomplete="off" autofocus class="form-control mx-auto" id="username" name="username" placeholder="Username" type="text">
-        </div>
-        <label for="password" class="form-label">Password</label>
-        <div class="input-group mb-3">
-            <span class="input-group-text">#</span>
-            <input class="form-control mx-auto" name="password" id="password" placeholder="Password" type="password">
-        </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text">##</span>
-            <input class="form-control mx-auto" name="confirmpassword" id="password" placeholder="Confirm Password" type="password">
-        </div>
-        {% if register_error %}
-            <div class="mb-3 form-control-plaintext">
-                <span style="color:red;">
-                     {{ error_message }}
-                </span>
+<div class="container">
+    <div class="row">
+        <div class="col-lg">
+            <div class="mt-5 alert alert-danger" role="alert">
+                <h4> Important Information!</h4>
+                <p>You are dealing with sensitive Govt data, please choose a strong password to protect your account from unauthorised access.
+                    Any leak in information from your account can lead to serious consequences. Please be careful and responsible while using this tool.
+                </p>
+                <hr>
+                <p class="mb-0">Upon registering your    
+                <strong>account needs to be approved by the Admin before you can login </strong>. You can contact the Admin at
+                <a href="mailto:"ayansarkar.js@gmail.com"">ayansarkar.js@gmail.com</a> for approval.</p>
             </div>
-        {% endif %}
-        <div class="d-flex justify-content-center">
-            <button class="btn btn-primary" type="submit">Register</button>
         </div>
-    </form>
+        <div class="col-lg">
+            <h1 class="mb-4 mt-5 text-center">Register for an Account</h1>
+            <div class="col-lg-8 mx-auto">
+                <form action="/register" method="post">
+                    <label for="person" class="form-label">Name</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">FN</span>
+                        <input autocomplete="off" autofocus class="form-control mx-auto" id="person" name="first-name" placeholder="First Name" type="text">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">LN</span>
+                        <input autocomplete="off" class="form-control mx-auto" id="person" name="last-name" placeholder="First Name" type="text">
+                    </div>
+                    <label for="username" class="form-label">Username</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">@</span>
+                        <input autocomplete="off" autofocus class="form-control mx-auto" id="username" name="username" placeholder="Username" type="text">
+                    </div>
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">#</span>
+                        <input class="form-control mx-auto" name="password" id="password" placeholder="Password" type="password">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">##</span>
+                        <input class="form-control mx-auto" name="confirmpassword" id="password" placeholder="Confirm Password" type="password">
+                    </div>
+                    {% if register_error %}
+                        <div class="mb-3 form-control-plaintext">
+                            <span style="color:red;">
+                            {{ error_message }}
+                            </span>
+                        </div>
+                    {% endif %}
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-primary" type="submit">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}

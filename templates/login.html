@@ -1,33 +1,93 @@
-{% extends "layout.html" %}
-
-{% block title %}
-    {{title}}
-{% endblock %}
-
-{% block main %}
-    <h1 class="mb-4 mt-5 text-center">Login to your Account</h1>
-    <div class="col-md-6 col-lg-3 mx-auto">
-    <form action="/login" method="post">
-        <label for="username" class="form-label">Username</label>
-        <div class="input-group mb-3">
-            <span class="input-group-text">@</span>
-            <input autocomplete="off" autofocus class="form-control mx-auto" id="username" name="username" placeholder="Username" type="text">
-        </div>
-        <label for="password" class="form-label">Password</label>
-        <div class="input-group mb-3">
-            <span class="input-group-text">#</span>
-            <input class="form-control mx-auto" name="password" id="password" placeholder="Password" type="password">
-        </div>
-        {% if login_error %}
-            <div class="mb-3 form-control-plaintext">
-                <span style="color:red;">
-                     {{ error_message }}
-                </span>
-            </div>
-        {% endif %}
-        <div class="d-flex justify-content-center">
-            <button class="btn btn-primary" type="submit">Log In</button>
-        </div>
-    </form>
+{% extends "layout.html" %} {% block title %} {{title}} {% endblock %} {% block
+main %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg">
+      <div class="mt-5 alert alert-success" role="alert">
+        <h4>About this Tool</h4>
+        <p>
+          This tool was made by Ayan Sarkar, PA(CO), O/o the PMG, SB Region
+          during his spare time only to facilitate the internal branch related
+          record maintenance work of this branch. This is not an official tool
+          and is not affiliated with any Govt department.
+        </p>
+        <hr />
+        <p class="mb-0">
+          This tool was made by me to facilitate maintenane of register of
+          medical bills, records of bills being processed in a complex manner so
+          as to generate required statistical data at any point of time.
+        </p>
+      </div>
+      <div class="mt-3 alert alert-warning" role="alert">
+        <h4>Disclaimer</h4>
+        <p>
+          By loging in and using this tool, you agree that you are solely
+          responsible for any data leak or misuse of this tool. Even though the
+          information available in this tool is entered by the users themselves,
+          it still contains records and information of sensitive nature and you
+          are requested to be careful and responsible while using this tool.
+        </p>
+        <hr />
+        <p class="mb-0">
+          You are dealing with sensitive government data, so you are advised to
+          regularly change your password and
+          <a href="mailto:ayansarkar.js@gmail.com"> inform the admin </a> if you
+          suspect any unauthorised access to your account.
+        </p>
+      </div>
     </div>
+    <div class="col-lg">
+      <h1 class="mb-4 mt-5 text-center">Login to your Account</h1>
+      <div class="col-lg-8 mx-auto">
+        <form action="/login" method="post">
+          <label for="username" class="form-label">Username</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text">@</span>
+            <input
+              autocomplete="off"
+              autofocus
+              class="form-control mx-auto"
+              id="username"
+              name="username"
+              placeholder="Username"
+              type="text"
+            />
+          </div>
+          <label for="password" class="form-label">Password</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text">#</span>
+            <input
+              class="form-control mx-auto"
+              name="password"
+              id="password"
+              placeholder="Password"
+              type="password"
+            />
+          </div>
+          <div class="mb-3 form-control-plaintext">
+            <span style="color: red"> <strong>Forgot Password?</strong> </span>
+          </div>
+          {% if login_error %}
+          <div
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
+            <span style="color: red"> {{ error_message }} </span>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+          {% endif %}
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary" type="submit">Log In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
