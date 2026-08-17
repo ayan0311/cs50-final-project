@@ -1,14 +1,18 @@
 #logo {
-    font-size: 28px;
-    font-family: 'InterDisplay', sans-serif;
-    font-weight: bold;
+  font-size: 28px;
+  font-family: "InterDisplay", sans-serif;
+  font-weight: bold;
 }
 
 #main-navbar {
-    font-size: 20px;
-    font-family: 'Inter', 'Helvetica', sans-serif;
+  font-size: 20px;
+  font-family: "Inter", "Helvetica", sans-serif;
 }
 
 .body {
-    font-family: 'Inter', 'Helvetica', sans-serif;
+  font-family: "Inter", "Helvetica", sans-serif;
+}
+
+#fpassword {
+  cursor: pointer;
 }

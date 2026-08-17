@@ -1,6 +1,8 @@
-from flask import Flask, render_template, session
+from flask import Flask, render_template, session, request
 from flask_session import Session
 import sqlite3
+
+from helpers import login_required
 
 
 
@@ -17,17 +19,16 @@ def get_db_connection():
 
 
 @app.route("/")
+@login_required
 def index():
-    session.clear()
-    #session["user_id"] = "ayan"
-    return render_template ("login.html", title="Login", super_admin=False)
+    return render_template ("index.html", title="Dash", super_admin=False)
 
 
 # Registration and Login/Logout Routes
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    return render_template ("register.html", title="Register", current_route="register")
+    return render_template ("register.html", title="Register", current_route="register", method="GET")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -43,5 +44,5 @@ def logout():
 
 if __name__ == "__main__":
     print("Running app...")    
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
     

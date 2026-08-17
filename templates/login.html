@@ -67,7 +67,57 @@ main %}
             />
           </div>
           <div class="mb-3 form-control-plaintext">
-            <span style="color: red"> <strong>Forgot Password?</strong> </span>
+            <span
+              style="color: red"
+              data-bs-toggle="modal"
+              data-bs-target="#fpModal"
+              id="fpassword"
+            >
+              <strong>Forgot Password?</strong>
+            </span>
+          </div>
+          <div
+            class="modal fade"
+            id="fpModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="loginError"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="loginError">Forgot Password</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  Please contact the admin at
+                  <a href="mailto:ayansarkar.js@gmail.com">
+                    ayansarkar.js@gmail.com</a
+                  >
+                  to reset your password. Please email from your registered
+                  email address and mention your username in the email. The
+                  admin will reset your password and send you a temporary
+                  password to login. You can then change your password after
+                  logging in.
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-dismiss="modal"
+                  >
+                    Understood
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
           {% if login_error %}
           <div
