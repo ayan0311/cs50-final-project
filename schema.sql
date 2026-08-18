@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS users (
     email TEXT NOT NULL,
     username TEXT NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,
-    is_admin INTEGER DEFAULT 0,
-    activation_status TEXT DEFAULT 'inactive',
+    is_admin BOOLEAN DEFAULT FALSE,
+    is_active BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (id)
 );
 
