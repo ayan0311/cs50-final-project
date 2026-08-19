@@ -45,24 +45,26 @@
       <div class="collapse navbar-collapse" id="main-navbar">
         {% if session["user_id"] %}
         <ul class="navbar-nav me-auto">
-          <li class="nav-item"><a class="nav-link" href="/">Dashboard</a></li>
           <li class="nav-item">
-            <a class="nav-link" href="/">Operator tools</a>
+            <a class="nav-link" href="/"><b>File Register</b></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/"><b>Tools</b></a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto me-2">
-          {% if super_admin %}
-          <button type="button" class="btn btn-primary btn-lg me-3">
-            Super Admin tools
-          </button>
-          {% else %}
-          <button type="button" class="btn btn-outline-primary btn-lg me-3">
-            Admin tools
-          </button>
+          {% if admin %}
+          <a
+            type="button"
+            class="btn btn-outline-primary btn-lg me-2"
+            href="/admin"
+          >
+            <b>Admin Tools</b>
+          </a>
           {% endif %}
           <a
             type="button"
-            class="btn btn-outline-danger btn-lg me-3"
+            class="btn btn-outline-danger btn-lg me-2"
             href="/logout"
           >
             <b>Logout</b>

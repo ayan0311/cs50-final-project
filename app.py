@@ -22,7 +22,9 @@ def get_db_connection():
 @app.route("/")
 @login_required
 def index():
-    return render_template ("index.html", title="Dash", super_admin=False)
+    db = get_db_connection()
+    user = db.execute("SELECT is_admin FROM users WHERE id = ?", (session["user_id"],)).fetchone()
+    return render_template ("index.html", title="Dash", admin=user["is_admin"])
 
 
 # Registration and Login/Logout Routes
