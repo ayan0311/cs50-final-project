@@ -1,9 +1,9 @@
-from flask import Flask, render_template, session, request, redirect
+from flask import Flask, render_template, session, request, redirect, g
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
-
-from helpers import login_required, get_current_user, get_db_connection
+import dbtools
+from helpers import login_required
 
 
 app = Flask(__name__)
@@ -12,21 +12,28 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+#Database Connections
+def get_db():
+    if "db" not in g:
+        g.db = sqlite3.connect("database.db")
+        g.db.row_factory = sqlite3.Row
+
+    return g.db
+
+@app.teardown_appcontext
+def close_db(exception=None):
+    db = g.pop("db", None)
+
+    if db is not None:
+        db.close()
+#Database Connections
 
 #Index Page
 @app.route("/")
 @login_required
 def index():
-    db = get_db_connection()
-    user = get_current_user()
+    user = dbtools.get_current_user(get_db(), session["user_id"])
     return render_template ("index.html", title="Dash", admin=user["is_admin"])
-
-
-
-
-
-
-
 
 
 # Registration and Login/Logout Routes
@@ -59,21 +66,15 @@ def register():
         userlastname = request.form.get("lastname")
 
         #insert into database (try)
-        db = get_db_connection()
         try:
-            db.execute(
-                 "INSERT INTO users (first_name, last_name, email, username, password_hash) VALUES (?,?,?,?,?)",
-                 (userfirstname, userlastname, useremail, username, generate_password_hash(password)))
-        except sqlite3.IntegrityError:
-            db.close()
+            dbtools.create_user(get_db(), userfirstname, userlastname, useremail, username, generate_password_hash(password))
+        except dbtools.UsernameExistsError:
             return render_template("register.html", title="Error",
                                                current_route = "register",
                                                method = request.method,
                                                register_error = True,
                                                error_message = "Username already Exists!")
         else:
-            db.commit()
-            db.close()
             return render_template("register.html", title="Registration Successful",
                                    method=request.method,
                                    current_route="register")
@@ -92,10 +93,9 @@ def login():
         if not request.form.get("username") or not request.form.get("password"):
             return render_template("login.html", title="Login", login_error=True, current_route="login", error_message="Please enter Username/password")
 
-        db = get_db_connection()
         username = request.form.get("username")
         password = request.form.get("password")
-        user = db.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
+        user = dbtools.get_user(get_db(), username)
 
         #check if username exists
         if not user:
@@ -111,8 +111,16 @@ def login():
         if not check_password_hash(user["password_hash"], password):
             return render_template ("login.html", title="Error", login_error=True, current_route="login", error_message="Invalid password!")
         
-        #remeber User who logged in:
-        session["user_id"] = user["id"]
+
+        #update the login_log:
+        try:
+            dbtools.update_login_log(get_db(), user["id"], 'login')
+        except dbtools.EntryError:
+            return render_template ("login.html", title="Error", login_error=True, current_route="login", 
+                                    error_message="Something went wrong, login again!")
+        else:
+            #remeber User who logged in:
+            session["user_id"] = user["id"]
 
         return redirect("/")
         
@@ -121,8 +129,13 @@ def login():
 
 @app.route("/logout")
 def logout():
-    session.clear() # Clears Session
-    return redirect("/") # Redirects to index
+    try:
+        dbtools.update_login_log(get_db(), session["user_id"], 'logout')
+    except dbtools.EntryError:
+        return redirect("/logout")
+    else:
+        session.clear() # Clears Session
+        return redirect("/") # Redirects to index
 
 # End of Registration and Login/logout routes
 

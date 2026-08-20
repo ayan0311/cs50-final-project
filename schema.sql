@@ -51,3 +51,32 @@ CREATE TABLE IF NOT EXISTS bills (
     PRIMARY KEY (id),
     FOREIGN KEY (file_id) REFERENCES files(id)
 );
+
+CREATE TABLE IF NOT EXISTS login_logs (
+    id INTEGER,
+    user_id INTEGER NOT NULL,
+    logged_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    activity TEXT NOT NULL CHECK(activity IN ('login', 'logout', 'modified_pass')),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS user_logs (
+    id INTEGER,
+    user_id INTEGER NOT NULL,
+    logged_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    activity TEXT NOT NULL CHECK(activity IN ('opened', 'deleted', 'accessed', 'modified')),
+    file_id INTEGER DEFAULT 0,
+    bill_id INTEGER DEFAULT 0,
+    division_id INTEGER DEFAULT 0,
+    employee_id INTEGER DEFAULT 0,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS admin_logs (
+    id INTEGER,
+    admin_id INTEGER NOT NULL,
+    logged_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    activity TEXT NOT NULL CHECK(activity IN ('activated', 'suspended', 'modified', 'accessed_user_logs', 'accessed_admin_logs')),
+    user_id INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (id)
+);
