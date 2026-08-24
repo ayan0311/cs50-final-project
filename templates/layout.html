@@ -35,7 +35,7 @@
         aria-controls="navbar"
         aria-expanded="false"
         aria-label="Toggle navigation"
-        class="navbar-toggler"
+        class="navbar-toggler me-3"
         data-bs-target="#main-navbar"
         data-bs-toggle="collapse"
         type="button"
@@ -52,7 +52,9 @@
             <a class="nav-link" href="/"><b>Tools</b></a>
           </li>
         </ul>
-        <ul class="navbar-nav ms-auto me-2">
+        <div
+          class="navbar-nav ms-auto gap-2 d-flex align-items-start align-items-md-center"
+        >
           {% if admin %}
           <a
             type="button"
@@ -69,15 +71,23 @@
           >
             <b>Logout</b>
           </a>
-        </ul>
+        </div>
         {% else %}
-        <ul class="navbar-nav ms-auto me-2">
+        <div
+          class="navbar-nav ms-auto me-2 d-flex align-items-start align-items-md-center"
+        >
           {% if current_route == "register" %}
-          <a type="button" class="btn btn-success btn-lg me-3" href="/login"
+          <a
+            type="button"
+            class="btn btn-success btn-lg me-3 ms-sm-2"
+            href="/login"
             >Login</a
           >
           {% elif current_route == "login" %}
-          <a type="button" class="btn btn-primary btn-lg me-3" href="/register"
+          <a
+            type="button"
+            class="btn btn-primary btn-lg me-3 ms-sm-2"
+            href="/register"
             >Register
           </a>
           {% else %}
@@ -88,7 +98,7 @@
             >Login</a
           >
           {% endif %}
-        </ul>
+        </div>
         {% endif %}
       </div>
     </nav>
